@@ -114,7 +114,8 @@ def generate_expert_traj(model, save_path=None, env=None, n_timesteps=0,
             cv2.imwrite(image_path, obs_)
             observations.append(image_path)
         else:
-            observations.append(obs)
+            obs_ = obs[0] if is_vec_env else obs
+            observations.append(obs_)
 
         if isinstance(model, BaseRLModel):
             action, state = model.predict(obs, state=state, mask=mask)
